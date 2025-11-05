@@ -3,11 +3,6 @@ let
   vars = import ./variables.nix;
 in
 {
-  # Allow insecure packages required by some dev tools
-  nixpkgs.config.permittedInsecurePackages = [
-    "mbedtls-2.28.10"  # Required by some development tools
-  ];
-
   imports = [
     ./hardware-configuration.nix
     ./host-packages.nix

@@ -54,8 +54,7 @@
     # nixfmt-rfc-style # Nix Formatter
     # nwg-displays # configure monitor configs via GUI
     # onefetch # provides zsaneyos build info on current system
-    pavucontrol # For Editing Audio Levels & Devices
-    easyeffects # Audio effects and equalizer
+    # pavucontrol # For Editing Audio Levels & Devices
     # pciutils # Collection Of Tools For Inspecting PCI Devices
     # picard # For Changing Music Metadata & Getting Cover Art
     # pkg-config # Wrapper Script For Allowing Packages To Get Info On Others

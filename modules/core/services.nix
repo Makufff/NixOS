@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   # Services to start
   services = {
@@ -37,82 +37,35 @@
       alsa.support32Bit = true;
       pulse.enable = true;
       jack.enable = true;
-      
-      wireplumber = {
-        enable = true;
-        configPackages = [
-          (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/51-alsa-disable-dsp.conf" ''
-            monitor.alsa.rules = [
-              {
-                matches = [
-                  {
-                    node.name = "~alsa_.*"
-                  }
-                ]
-                actions = {
-                  update-props = {
-                    api.alsa.period-size = 2048
-                    api.alsa.period-num = 2
-                    api.alsa.headroom = 8192
-                    session.suspend-timeout-seconds = 0
-                  }
-                }
-              }
-            ]
-          '')
-        ];
-      };
-      
-      extraConfig.pipewire."92-audio-quality" = {
+      # wireplumber = {
+      #   enable = true;
+      #   configPackages = [
+      #     (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/11-bluetooth-policy.conf" ''
+      #       bluetooth.autoswitch-to-headset-profile = false
+      #     '')
+      #   ];
+      # };
+      extraConfig.pipewire."92-low-latency" = {
         "context.properties" = {
           "default.clock.rate" = 48000;
-          "default.clock.quantum" = 2048;
-          "default.clock.min-quantum" = 2048;
-          "default.clock.max-quantum" = 8192;
-          "link.max-buffers" = 16;
-          "log.level" = 2;
+          "default.clock.quantum" = 256;
+          "default.clock.min-quantum" = 256;
+          "default.clock.max-quantum" = 256;
         };
-        "context.modules" = [
-          {
-            name = "libpipewire-module-rtkit";
-            args = {
-              "nice.level" = -15;
-              "rt.prio" = 88;
-              "rt.time.soft" = 200000;
-              "rt.time.hard" = 200000;
-            };
-            flags = [ "ifexists" "nofail" ];
-          }
-          {
-            name = "libpipewire-module-protocol-native";
-          }
-        ];
       };
-      
-      extraConfig.pipewire-pulse."92-audio-quality" = {
+      extraConfig.pipewire-pulse."92-low-latency" = {
         context.modules = [
           {
             name = "libpipewire-module-protocol-pulse";
             args = {
-              pulse.min.req = "2048/48000";
-              pulse.default.req = "2048/48000";
-              pulse.max.req = "8192/48000";
-              pulse.min.quantum = "2048/48000";
-              pulse.max.quantum = "8192/48000";
-              pulse.min.frag = "2048/48000";
-              pulse.default.frag = "2048/48000";
-              pulse.default.tlength = "8192/48000";
-              pulse.min.tlength = "2048/48000";
+              pulse.min.req = "256/48000";
+              pulse.default.req = "256/48000";
+              pulse.max.req = "256/48000";
+              pulse.min.quantum = "256/48000";
+              pulse.max.quantum = "256/48000";
             };
           }
         ];
-        "stream.properties" = {
-          resample.quality = 10;
-          resample.disable = false;
-          channelmix.normalize = false;
-          channelmix.mix-lfe = false;
-          channelmix.upmix = false;
-        };
       };
     };
   };
