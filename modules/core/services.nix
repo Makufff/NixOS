@@ -33,6 +33,15 @@
     # Tailscale VPN
     tailscale.enable = true;
 
+    # OpenVPN
+    openvpn.servers = {
+      # Example server config - uncomment and configure as needed
+      # myVPN = {
+      #   config = '' config /path/to/your/config.ovpn '';
+      #   autoStart = false;
+      # };
+    };
+
     pulseaudio.enable = false;
     pipewire = {
       enable = true;
