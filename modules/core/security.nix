@@ -4,6 +4,12 @@
   security = {
     rtkit.enable = true;
     polkit.enable = true;
+    pam.loginLimits = [
+      { domain = "@audio"; item = "memlock"; type = "-"; value = "unlimited"; }
+      { domain = "@audio"; item = "rtprio"; type = "-"; value = "99"; }
+      { domain = "@audio"; item = "nofile"; type = "soft"; value = "99999"; }
+      { domain = "@audio"; item = "nofile"; type = "hard"; value = "99999"; }
+    ];
     apparmor = {
       enable = true;
       killUnconfinedConfinables = true;
@@ -43,6 +49,12 @@
       "net.core.wmem_max" = 67108864;
       "net.core.rmem_max" = 67108864;
       "net.core.netdev_max_backlog" = "10000";
+      
+      # Audio optimization
+      "vm.swappiness" = 10;
+      "kernel.sched_latency_ns" = 4000000;
+      "kernel.sched_min_granularity_ns" = 500000;
+      "kernel.sched_wakeup_granularity_ns" = 50000;
     };
   };
 }

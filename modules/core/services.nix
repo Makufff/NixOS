@@ -37,20 +37,40 @@
       alsa.support32Bit = true;
       pulse.enable = true;
       jack.enable = true;
-      # wireplumber = {
-      #   enable = true;
-      #   configPackages = [
-      #     (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/11-bluetooth-policy.conf" ''
-      #       bluetooth.autoswitch-to-headset-profile = false
-      #     '')
-      #   ];
-      # };
+      
+      wireplumber = {
+        enable = true;
+        configPackages = [
+          (pkgs.writeTextDir "share/wireplumber/wireplumber.conf.d/51-alsa-disable-dsp.conf" ''
+            monitor.alsa.rules = [
+              {
+                matches = [
+                  {
+                    node.name = "~alsa_.*"
+                  }
+                ]
+                actions = {
+                  update-props = {
+                    api.alsa.period-size = 2048
+                    api.alsa.period-num = 2
+                    api.alsa.headroom = 8192
+                    session.suspend-timeout-seconds = 0
+                  }
+                }
+              }
+            ]
+          '')
+        ];
+      };
+      
       extraConfig.pipewire."92-audio-quality" = {
         "context.properties" = {
           "default.clock.rate" = 48000;
           "default.clock.quantum" = 2048;
-          "default.clock.min-quantum" = 1024;
+          "default.clock.min-quantum" = 2048;
           "default.clock.max-quantum" = 8192;
+          "link.max-buffers" = 16;
+          "log.level" = 2;
         };
         "context.modules" = [
           {
@@ -63,8 +83,12 @@
             };
             flags = [ "ifexists" "nofail" ];
           }
+          {
+            name = "libpipewire-module-protocol-native";
+          }
         ];
       };
+      
       extraConfig.pipewire-pulse."92-audio-quality" = {
         context.modules = [
           {
@@ -72,18 +96,22 @@
             args = {
               pulse.min.req = "2048/48000";
               pulse.default.req = "2048/48000";
-              pulse.max.req = "2048/48000";
+              pulse.max.req = "8192/48000";
               pulse.min.quantum = "2048/48000";
-              pulse.max.quantum = "2048/48000";
+              pulse.max.quantum = "8192/48000";
               pulse.min.frag = "2048/48000";
               pulse.default.frag = "2048/48000";
+              pulse.default.tlength = "8192/48000";
+              pulse.min.tlength = "2048/48000";
             };
           }
         ];
-        stream.properties = {
+        "stream.properties" = {
           resample.quality = 10;
+          resample.disable = false;
           channelmix.normalize = false;
           channelmix.mix-lfe = false;
+          channelmix.upmix = false;
         };
       };
     };
