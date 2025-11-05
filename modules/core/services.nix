@@ -45,27 +45,30 @@
       #     '')
       #   ];
       # };
-      extraConfig.pipewire."92-low-latency" = {
+      extraConfig.pipewire."92-audio-quality" = {
         "context.properties" = {
           "default.clock.rate" = 48000;
-          "default.clock.quantum" = 256;
-          "default.clock.min-quantum" = 256;
-          "default.clock.max-quantum" = 256;
+          "default.clock.quantum" = 1024;
+          "default.clock.min-quantum" = 512;
+          "default.clock.max-quantum" = 2048;
         };
       };
-      extraConfig.pipewire-pulse."92-low-latency" = {
+      extraConfig.pipewire-pulse."92-audio-quality" = {
         context.modules = [
           {
             name = "libpipewire-module-protocol-pulse";
             args = {
-              pulse.min.req = "256/48000";
-              pulse.default.req = "256/48000";
-              pulse.max.req = "256/48000";
-              pulse.min.quantum = "256/48000";
-              pulse.max.quantum = "256/48000";
+              pulse.min.req = "1024/48000";
+              pulse.default.req = "1024/48000";
+              pulse.max.req = "1024/48000";
+              pulse.min.quantum = "1024/48000";
+              pulse.max.quantum = "1024/48000";
             };
           }
         ];
+        stream.properties = {
+          resample.quality = 10;
+        };
       };
     };
   };
