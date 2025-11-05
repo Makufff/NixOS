@@ -26,7 +26,7 @@
   timezone = "Asia/Bangkok";
   locale = "en_US.UTF-8";
   clock24h = true;
-  kbdLayout = "us";
+  kbdLayout = "us,th";
   kbdVariant = "";
   consoleKeymap = "us";
 }

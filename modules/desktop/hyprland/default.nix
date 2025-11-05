@@ -172,8 +172,8 @@ in
                   "pamixer --set-volume 50"
                 ];
               input = {
-                kb_layout = "${kbdLayout},ru";
-                kb_variant = "${kbdVariant},";
+                kb_layout = "${kbdLayout}";
+                kb_variant = "${kbdVariant}";
                 repeat_delay = 275; # or 212
                 repeat_rate = 35;
                 numlock_by_default = true;
@@ -444,14 +444,14 @@ in
                   "$mainMod CTRL, C, exec, hyprpicker --autocopy --format=hex" # Colour Picker
 
                   "$mainMod, A, exec, launcher drun" # launch desktop applications
-                  "$mainMod, SPACE, exec, launcher drun" # launch desktop applications
+                  "$mainMod, Tab, exec, launcher drun" # launch desktop applications
                   "$mainMod SHIFT, W, exec, launcher wallpaper" # launch wallpaper switcher
                   "$mainMod, Z, exec, launcher emoji" # launch emoji picker
                   "$mainMod SHIFT, T, exec, launcher tmux" # launch tmux sessions
                   "$mainMod, G, exec, launcher games" # game launcher
                   # "$mainMod, tab, exec, launcher window" # switch between desktop applications
                   # "$mainMod, R, exec, launcher file" # brrwse system files
-                  "$mainMod ALT, K, exec, ${./scripts/keyboardswitch.sh}" # change keyboard layout
+                  "$mainMod, SPACE, exec, ${./scripts/keyboardswitch.sh}" # change keyboard layout
                   "$mainMod SHIFT, N, exec, swaync-client -t -sw" # swayNC panel
                   "$mainMod SHIFT, Q, exec, swaync-client -t -sw" # swayNC panel
                   "$mainMod ALT, G, exec, ${./scripts/gamemode.sh}" # disable hypr effects for gamemode
@@ -480,9 +480,9 @@ in
                   # ",XF86AudioPlay,exec,${./scripts/MediaCtrl.sh} play-pause" # go to next media
                   # ",XF86AudioPause,exec,${./scripts/MediaCtrl.sh} play-pause" # go to next media
 
-                  # to switch between windows in a floating workspace
-                  "$mainMod, Tab, cyclenext"
-                  "$mainMod, Tab, bringactivetotop"
+                  # to switch between windows in a floating workspace (disabled because Tab is used for launcher)
+                  # "$mainMod, Tab, cyclenext"
+                  # "$mainMod, Tab, bringactivetotop"
 
                   # Switch workspaces relative to the active workspace with mainMod + CTRL + [←→]
                   "$mainMod CTRL, right, workspace, r+1"
