@@ -39,8 +39,6 @@
     tldr # Improved Man
     unrar # Tool For Handling .rar Files
     unzip # Tool For Handling .zip Files
-    rnnoise-plugin # Noise suppression plugin for PipeWire
-    easyeffects # Audio effects manager with noise reduction
     pavucontrol # For Editing Audio Levels & Devices
     # aider-chat # AI in terminal (Optional: Client only)
     # cmatrix # Matrix Movie Effect In Terminal
