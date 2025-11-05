@@ -13,6 +13,9 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "mbedtls-2.28.10"
+  ];
 
   environment.systemPackages = with pkgs; [
     appimage-run # Needed For AppImage Support
