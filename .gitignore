@@ -1,0 +1,12 @@
+.direnv/
+target
+result
+result-*
+output-*
+
+.vscode
+*.log
+*.tmp
+
+[Bb]ackup
+[Bb]ackup/*
