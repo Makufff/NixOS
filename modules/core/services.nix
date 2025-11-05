@@ -48,26 +48,42 @@
       extraConfig.pipewire."92-audio-quality" = {
         "context.properties" = {
           "default.clock.rate" = 48000;
-          "default.clock.quantum" = 1024;
-          "default.clock.min-quantum" = 512;
-          "default.clock.max-quantum" = 2048;
+          "default.clock.quantum" = 2048;
+          "default.clock.min-quantum" = 1024;
+          "default.clock.max-quantum" = 8192;
         };
+        "context.modules" = [
+          {
+            name = "libpipewire-module-rtkit";
+            args = {
+              "nice.level" = -15;
+              "rt.prio" = 88;
+              "rt.time.soft" = 200000;
+              "rt.time.hard" = 200000;
+            };
+            flags = [ "ifexists" "nofail" ];
+          }
+        ];
       };
       extraConfig.pipewire-pulse."92-audio-quality" = {
         context.modules = [
           {
             name = "libpipewire-module-protocol-pulse";
             args = {
-              pulse.min.req = "1024/48000";
-              pulse.default.req = "1024/48000";
-              pulse.max.req = "1024/48000";
-              pulse.min.quantum = "1024/48000";
-              pulse.max.quantum = "1024/48000";
+              pulse.min.req = "2048/48000";
+              pulse.default.req = "2048/48000";
+              pulse.max.req = "2048/48000";
+              pulse.min.quantum = "2048/48000";
+              pulse.max.quantum = "2048/48000";
+              pulse.min.frag = "2048/48000";
+              pulse.default.frag = "2048/48000";
             };
           }
         ];
         stream.properties = {
           resample.quality = 10;
+          channelmix.normalize = false;
+          channelmix.mix-lfe = false;
         };
       };
     };
