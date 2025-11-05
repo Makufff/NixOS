@@ -10,4 +10,10 @@
       PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
     };
   };
+
+  # SSH client config - fix terminal type issues
+  programs.ssh.extraConfig = ''
+    Host *
+      SetEnv TERM=xterm-256color
+  '';
 }
