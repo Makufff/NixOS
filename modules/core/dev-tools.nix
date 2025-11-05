@@ -157,7 +157,7 @@
     spago
     
     # SWI-Prolog
-    swiProlog
+    swi-prolog
     
     # Haxe
     haxe
