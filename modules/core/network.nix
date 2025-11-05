@@ -68,6 +68,12 @@ in
     '';
   };
 
+  # NetworkManager VPN plugins
+  networking.networkmanager.plugins = with pkgs; [
+    networkmanager-openvpn
+    networkmanager-openconnect
+  ];
+
   environment.systemPackages = with pkgs; [
     networkmanagerapplet
     iproute2
