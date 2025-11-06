@@ -53,28 +53,28 @@
       # Simple wireplumber config (Ubuntu style)
       wireplumber.enable = true;
       
-      # Ubuntu-style: Simple and stable audio settings
-      extraConfig.pipewire."92-low-latency" = {
-        "context.properties" = {
-          "default.clock.rate" = 48000;
-          "default.clock.quantum" = 1024;
-          "default.clock.min-quantum" = 512;
-          "default.clock.max-quantum" = 2048;
-        };
-      };
+      # # Ubuntu-style: Simple and stable audio settings
+      # extraConfig.pipewire."92-low-latency" = {
+      #   "context.properties" = {
+      #     "default.clock.rate" = 48000;
+      #     "default.clock.quantum" = 1024;
+      #     "default.clock.min-quantum" = 512;
+      #     "default.clock.max-quantum" = 2048;
+      #   };
+      # };
       
-      extraConfig.pipewire-pulse."92-low-latency" = {
-        "pulse.properties" = {
-          "pulse.min.req" = "1024/48000";
-          "pulse.default.req" = "1024/48000";
-          "pulse.max.req" = "2048/48000";
-          "pulse.min.quantum" = "1024/48000";
-          "pulse.max.quantum" = "2048/48000";
-        };
-        "stream.properties" = {
-          "resample.quality" = 10;
-        };
-      };
+      # extraConfig.pipewire-pulse."92-low-latency" = {
+      #   "pulse.properties" = {
+      #     "pulse.min.req" = "1024/48000";
+      #     "pulse.default.req" = "1024/48000";
+      #     "pulse.max.req" = "2048/48000";
+      #     "pulse.min.quantum" = "1024/48000";
+      #     "pulse.max.quantum" = "2048/48000";
+      #   };
+      #   "stream.properties" = {
+      #     "resample.quality" = 10;
+      #   };
+      # };
     };
   };
 }
