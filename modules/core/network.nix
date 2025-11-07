@@ -1,12 +1,25 @@
-{ host, pkgs, ... }:
+{ host, pkgs, lib , ... }:
 let
   inherit (import ../../hosts/${host}/variables.nix) hostname;
 in
 {
+  # Enable additional networking features
+  networking.wireless.enable = false; # Disable wpa_supplicant in favor of NetworkManager
   networking = {
     hostName = "${hostname}";
-    networkmanager.enable = true;
-    # wireless.enable = true; # Enables wireless support via wpa_supplicant.
+    networkmanager = {
+      enable = true;
+      # Use systemd-resolved for DNS (force to override conflicts)
+      dns = lib.mkForce "systemd-resolved";
+      # Enable WiFi powersave (can be disabled if causing connection issues)
+      wifi.powersave = false;
+      # Scan WiFi more frequently for better connection
+      wifi.scanRandMacAddress = true;
+    };
+    # Fallback DNS servers
+    nameservers = ["1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4"];
+    # Enable DHCP on all interfaces by default
+    useDHCP = lib.mkDefault true;
     # proxy = {
     #   default = "http://user:password@proxy:port/";
     #   noProxy = "127.0.0.1,localhost,internal.domain";
@@ -14,18 +27,29 @@ in
 
     firewall = {
       enable = true;
+      # Allow common connectivity ports
       allowedTCPPorts = [
         22 # SSH (Secure Shell) - remote access
         80 # HTTP - web traffic
         443 # HTTPS - encrypted web traffic
+        53 # DNS over TCP
+        1194 # OpenVPN default port
         59010 # Custom application port
         59011 # Custom application port
         8080 # Alternative HTTP/web server port
       ];
       allowedUDPPorts = [
+        53 # DNS
+        67 # DHCP server
+        68 # DHCP client
+        1194 # OpenVPN default port
         59010 # Custom application port
         59011 # Custom application port
       ];
+      # Allow ping for network diagnostics
+      allowPing = true;
+      # Log refused connections for debugging
+      logRefusedConnections = false;
     };
     localCommands = ''
       WANIF="eno1"
@@ -68,14 +92,36 @@ in
     '';
   };
 
-  # NetworkManager VPN plugins
+  # NetworkManager VPN plugins for various connection types
   networking.networkmanager.plugins = with pkgs; [
-    networkmanager-openvpn
-    networkmanager-openconnect
+    networkmanager-openvpn     # OpenVPN support
+    networkmanager-openconnect # Cisco AnyConnect/ocserv support
+    networkmanager-vpnc        # Cisco VPN support
+    networkmanager-l2tp        # L2TP VPN support
+    networkmanager-fortisslvpn # FortiSSL VPN support
+    networkmanager-strongswan  # IPSec/IKEv2 VPN support (replaces enableStrongSwan)
   ];
 
+  # WiFi and network utilities
   environment.systemPackages = with pkgs; [
-    networkmanagerapplet
-    iproute2
+    networkmanagerapplet # GUI for NetworkManager
+    # modemmanager        # Mobile broadband support (disabled for now)
+    # usb-modeswitch      # USB modem mode switching (disabled for now)
+    iproute2            # Network configuration tools
+    wirelesstools       # WiFi tools (iwconfig, iwlist) - corrected package name
+    wpa_supplicant      # WiFi authentication
+    ethtool            # Ethernet diagnostics
+    tcpdump            # Network packet analyzer
+    nmap               # Network scanner
+    wget               # File downloader
+    curl               # HTTP client
+    dig                # DNS lookup
+    whois              # Domain information
+    traceroute         # Network path tracing
+    iperf3             # Network performance testing
+    dnsutils           # Additional DNS tools
+    net-tools          # Classic network tools (ifconfig, netstat)
+    bridge-utils       # Network bridge utilities
   ];
+
 }

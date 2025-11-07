@@ -11,6 +11,7 @@
     ./sddm.nix
     ./security.nix
     ./dns.nix
+    ./hotspot.nix
     ./services.nix
     # ./games.nix
     # ./dlna.nix

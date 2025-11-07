@@ -29,6 +29,8 @@ let
     (import ./extract.nix scriptArgs)
     (import ./driverinfo.nix scriptArgs)
     (import ./underwatt.nix scriptArgs)
+    (import ./network-debug.nix scriptArgs)
+    (import ./network-reset.nix scriptArgs)
     # Add new scripts here as you create them
   ];
 in

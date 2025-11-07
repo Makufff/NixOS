@@ -1,4 +1,4 @@
-{ ... }:
+{ lib , ... }:
 {
   networking.firewall = {
     allowedTCPPorts = [
@@ -10,16 +10,26 @@
       5335
     ];
   };
-  # Disable systemd dns resolver
+  # Enable systemd dns resolver for better connectivity
   services.resolved = {
-    enable = false;
+    enable = true;
     domains = [ "~." ];
-    fallbackDns = [ ]; # Empty to prevent bypass
-    dnsovertls = "true";
-
-    # github.com/systemd/systemd/issues/10579
-    # dnssec = "allow-downgrade";
-    dnssec = "false";
+    # Multiple fallback DNS for redundancy
+    fallbackDns = [ 
+      "1.1.1.1" 
+      "1.0.0.1" 
+      "8.8.8.8" 
+      "8.8.4.4"
+      "9.9.9.9"
+    ];
+    dnsovertls = "opportunistic"; # Use TLS when available, fallback to regular DNS
+    
+    # More permissive DNSSEC for better connectivity
+    dnssec = "allow-downgrade";
+    
+    # Additional settings for better connectivity
+    llmnr = "true";
+    # multicastDns = "true"; # This option doesn't exist, removing it
   };
   systemd.services = {
     unbound.stopIfChanged = false;
@@ -32,6 +42,8 @@
     };
   };
   services = {
+    # dhcpcd.enable = false;
+    tailscale.extraUpFlags = [ "--accept-dns=false" ];
     unbound = {
       enable = true;
       settings = {
