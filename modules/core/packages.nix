@@ -39,9 +39,12 @@
     tldr # Improved Man
     unrar # Tool For Handling .rar Files
     unzip # Tool For Handling .zip Files
-    pavucontrol # For Editing Audio Levels & Devices
-    openvpn3 # OpenVPN 3 Client
-    dbeaver-bin # Universal Database Tool
+  pavucontrol # For Editing Audio Levels & Devices
+  openvpn3 # OpenVPN 3 Client
+  dbeaver-bin # Universal Database Tool
+  # Docker packages
+  docker       # Docker daemon + CLI
+  docker-compose # Docker Compose (v1/v2 wrapper if available)
     # aider-chat # AI in terminal (Optional: Client only)
     # cmatrix # Matrix Movie Effect In Terminal
     # cowsay # Great Fun Terminal Program
