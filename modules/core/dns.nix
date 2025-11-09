@@ -10,26 +10,10 @@
       5335
     ];
   };
-  # Enable systemd dns resolver for better connectivity
+  # Disable systemd-resolved to allow AdGuardHome to use port 53
+  # AdGuardHome will handle DNS resolution on port 53
   services.resolved = {
-    enable = true;
-    domains = [ "~." ];
-    # Multiple fallback DNS for redundancy
-    fallbackDns = [ 
-      "1.1.1.1" 
-      "1.0.0.1" 
-      "8.8.8.8" 
-      "8.8.4.4"
-      "9.9.9.9"
-    ];
-    dnsovertls = "opportunistic"; # Use TLS when available, fallback to regular DNS
-    
-    # More permissive DNSSEC for better connectivity
-    dnssec = "allow-downgrade";
-    
-    # Additional settings for better connectivity
-    llmnr = "true";
-    # multicastDns = "true"; # This option doesn't exist, removing it
+    enable = false;
   };
   systemd.services = {
     unbound.stopIfChanged = false;

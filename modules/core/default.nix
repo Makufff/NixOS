@@ -19,6 +19,6 @@
     ./system.nix
     ./users.nix
     # ./flatpak.nix
-    # ./virtualisation.nix
+    ./virtualisation.nix
   ];
 }

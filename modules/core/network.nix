@@ -17,9 +17,13 @@ in
       wifi.scanRandMacAddress = true;
     };
     # Fallback DNS servers
-    nameservers = ["1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4"];
+    nameservers = ["1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4" "10.253.192.1"];
     # Enable DHCP on all interfaces by default
     useDHCP = lib.mkDefault true;
+    # Extra hosts for internal domains
+    extraHosts = ''
+      10.30.32.15 pve-1.it.kmitl.ac.th
+    '';
     # proxy = {
     #   default = "http://user:password@proxy:port/";
     #   noProxy = "127.0.0.1,localhost,internal.domain";
@@ -37,6 +41,7 @@ in
         59010 # Custom application port
         59011 # Custom application port
         8080 # Alternative HTTP/web server port
+        8006 # Proxmox VE web interface
       ];
       allowedUDPPorts = [
         53 # DNS

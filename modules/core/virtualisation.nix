@@ -15,10 +15,7 @@
       qemu = {
         package = pkgs.qemu_kvm;
         swtpm.enable = true;
-        ovmf = {
-          enable = true;
-          packages = [ pkgs.OVMFFull.fd ];
-        };
+        # ovmf submodule has been removed - OVMF images are now available by default
       };
       hooks.qemu = {
         "passthrough" = lib.getExe (
