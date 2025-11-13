@@ -42,6 +42,9 @@
       # };
     };
 
+  # RDP server
+  xrdp.enable = true;
+
     pulseaudio.enable = false;
     pipewire = {
       enable = true;

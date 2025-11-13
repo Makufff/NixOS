@@ -38,6 +38,7 @@ in
         443 # HTTPS - encrypted web traffic
         53 # DNS over TCP
         1194 # OpenVPN default port
+        3389 # RDP (Remote Desktop Protocol)
         59010 # Custom application port
         59011 # Custom application port
         8080 # Alternative HTTP/web server port

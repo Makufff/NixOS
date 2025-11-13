@@ -47,6 +47,10 @@ in
     openvpn3 # OpenVPN 3 Client
     openvpn  # OpenVPN 2 Client (for direct VPN connections)
     dbeaver-bin # Universal Database Tool
+  # RDP (Remote Desktop)
+  xrdp            # RDP server
+  remmina         # Remote desktop client (supports RDP, VNC, SSH)
+  freerdp         # RDP client (command-line / cli libs)
   # JetBrains IDEs
   webstormPkg      # WebStorm if available, otherwise JetBrains Toolbox fallback
   jetbrains-toolbox # Optional: JetBrains Toolbox for managing JetBrains IDEs
