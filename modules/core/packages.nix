@@ -43,6 +43,9 @@
     openvpn3 # OpenVPN 3 Client
     openvpn  # OpenVPN 2 Client (for direct VPN connections)
     dbeaver-bin # Universal Database Tool
+  # JetBrains IDEs
+  webstorm      # WebStorm (JetBrains) - requires unfree packages enabled
+  jetbrains-toolbox # Optional: JetBrains Toolbox for managing JetBrains IDEs
   # Docker packages
   docker       # Docker daemon + CLI
   docker-compose # Docker Compose (v1/v2 wrapper if available)
