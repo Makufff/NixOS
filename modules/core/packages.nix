@@ -51,10 +51,10 @@ in
     xrdp            # RDP server
     remmina         # Remote desktop client (supports RDP, VNC, SSH)
     freerdp         # RDP client (command-line / cli libs)
-    # Python environment management
-    # conda/miniconda has build issues - install manually via:
-    # wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    # bash Miniconda3-latest-Linux-x86_64.sh
+    # Python tools (use manual conda install or python3 + venv)
+    python3         # Python 3 interpreter
+    python3Packages.pip
+    python3Packages.virtualenv
   # JetBrains IDEs
   webstormPkg      # WebStorm if available, otherwise JetBrains Toolbox fallback
   jetbrains-toolbox # Optional: JetBrains Toolbox for managing JetBrains IDEs
