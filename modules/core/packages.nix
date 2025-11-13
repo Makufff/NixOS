@@ -1,4 +1,8 @@
 { pkgs, ... }:
+let
+  # Use webstorm if available in this nixpkgs, otherwise fall back to jetbrains-toolbox
+  webstormPkg = if builtins.hasAttr "webstorm" pkgs then pkgs.webstorm else pkgs.jetbrains-toolbox;
+in
 {
   # TODO: review
   programs = {
@@ -44,7 +48,7 @@
     openvpn  # OpenVPN 2 Client (for direct VPN connections)
     dbeaver-bin # Universal Database Tool
   # JetBrains IDEs
-  webstorm      # WebStorm (JetBrains) - requires unfree packages enabled
+  webstormPkg      # WebStorm if available, otherwise JetBrains Toolbox fallback
   jetbrains-toolbox # Optional: JetBrains Toolbox for managing JetBrains IDEs
   # Docker packages
   docker       # Docker daemon + CLI
