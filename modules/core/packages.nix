@@ -52,7 +52,7 @@ in
     remmina         # Remote desktop client (supports RDP, VNC, SSH)
     freerdp         # RDP client (command-line / cli libs)
     # Python environment management
-    micromamba      # Fast Conda-compatible package/environment manager (drop-in replacement)
+    conda           # Conda package/environment manager
   # JetBrains IDEs
   webstormPkg      # WebStorm if available, otherwise JetBrains Toolbox fallback
   jetbrains-toolbox # Optional: JetBrains Toolbox for managing JetBrains IDEs
