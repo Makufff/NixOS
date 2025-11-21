@@ -458,6 +458,10 @@ in
                   "$mainMod, V, exec, ${./scripts/ClipManager.sh}" # Clipboard Manager
                   "$mainMod, M, exec, ${./scripts/rofimusic.sh}" # online music
 
+                  # Display mode switching (extend/duplicate/mirror)
+                  "$mainMod, O, exec, ${./scripts/display-switch.sh} toggle" # Toggle display mode
+                  "$mainMod SHIFT, O, exec, ${./scripts/display-switch.sh} cycle" # Cycle extend/duplicate
+
                   # Screenshot/Screencapture
                   "$mainMod SHIFT, R, exec, ${./scripts/screen-record.sh} a" # Screen Record (area select)
                   "$mainMod CTRL, R, exec, ${./scripts/screen-record.sh} m" # Screen Record (monitor select)

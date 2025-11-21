@@ -36,6 +36,7 @@ in
     fd # Better Find
     git # Git
     gh # Github Authentication Client
+  google-chrome # Google Chrome browser
     libjxl # Support for JXL Images
     microfetch # Small fetch (Blazingly fast)
     nix-prefetch-scripts # Find Hashes/Revisions of Nix Packages
@@ -61,6 +62,12 @@ in
   # Docker packages
   docker       # Docker daemon + CLI
   docker-compose # Docker Compose (v1/v2 wrapper if available)
+  vmware-workstation # VMware Workstation (host application)
+    # Virtualisation / VM tools
+    qemu_kvm # QEMU KVM hypervisor
+    libvirt # libvirt management tools (includes virt-install)
+    virt-manager # GUI manager for virtual machines
+    libguestfs # Tools for manipulating guest filesystem images
     # aider-chat # AI in terminal (Optional: Client only)
     # cmatrix # Matrix Movie Effect In Terminal
     # cowsay # Great Fun Terminal Program

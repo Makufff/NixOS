@@ -44,6 +44,7 @@ in
               "pulseaudio"
               "network"
               "bluetooth"
+              "custom/display-switch"
               "tray"
               "battery"
             ];
@@ -107,6 +108,14 @@ in
               interval = 5; # once every 5 seconds
               tooltip = true;
               max-length = 1000;
+            };
+            "custom/display-switch" = {
+              exec = "${../../scripts/display-switch.sh} status";
+              return-type = "json";
+              format = "{}";
+              on-click = "${../../scripts/display-switch.sh} cycle";
+              interval = 2; # check every 2 seconds
+              tooltip = true;
             };
             "custom/icon" = {
               # format = " ";
@@ -471,6 +480,7 @@ in
           #workspaces,
           #custom-backlight,
           #custom-cycle_wall,
+          #custom-display-switch,
           #custom-gpuinfo,
           #custom-keybinds,
           #custom-keyboard,
@@ -647,6 +657,19 @@ in
 
           #cava {
           	color: @pink;
+          }
+
+          #custom-display-switch {
+            color: @blue;
+          }
+          #custom-display-switch.extend {
+            color: @green;
+          }
+          #custom-display-switch.duplicate {
+            color: @yellow;
+          }
+          #custom-display-switch.single {
+            color: @blue;
           }
 
           #mpris {
