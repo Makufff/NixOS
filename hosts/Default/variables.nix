@@ -9,6 +9,7 @@
   sddmTheme = "astronaut"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
   defaultWallpaper = "kurzgesagt.webp"; # Change with SUPER + SHIFT + W
   hyprlockWallpaper = "evening-sky.webp";
+  hyprlockBlur = 1; # ปรับค่าตามต้องการ (0 = ไม่เบลอ, 3 = เบลอมาก)
 
   # Default Applications
   terminal = "kitty"; # kitty, alacritty
