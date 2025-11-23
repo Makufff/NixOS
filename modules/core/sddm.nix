@@ -5,31 +5,12 @@
   ...
 }:
 let
-  inherit (import ../../hosts/${host}/variables.nix) sddmTheme;
+  inherit (import ../../hosts/${host}/variables.nix) sddmTheme sddmWallpaper;
   
-  # Custom SDDM theme with custom wallpaper
-  sddm-custom = pkgs.stdenv.mkDerivation {
-    pname = "sddm-astronaut-custom";
-    version = "1.0";
-    src = pkgs.sddm-astronaut;
-    
-    buildInputs = [ pkgs.rsync ];
-    
-    installPhase = ''
-      mkdir -p $out
-      cp -r $src/* $out/
-      
-      # Replace astronaut wallpaper with custom one
-      cp ${../themes/wallpapers/yns4.jpg} $out/Backgrounds/yns4.jpg
-      
-      # Update theme.conf for astronaut theme to use custom background
-      if [ -f "$out/Themes/astronaut/theme.conf" ]; then
-        sed -i 's|Background=.*|Background="Backgrounds/yns4.jpg"|g' $out/Themes/astronaut/theme.conf
-      fi
-    '';
-  };
+  # Path to custom wallpaper - easily changeable via variables.nix
+  customWallpaper = ../themes/wallpapers/${sddmWallpaper};
   
-  sddm-astronaut = (if sddmTheme == "astronaut" then sddm-custom else pkgs.sddm-astronaut).override {
+  sddm-astronaut = pkgs.sddm-astronaut.override {
     embeddedTheme = "${sddmTheme}";
     themeConfig =
       if lib.hasSuffix "custom_theme" sddmTheme then
@@ -55,8 +36,27 @@ let
       else
         { };
   };
+  
+  # Wrap sddm-astronaut to replace wallpaper if using astronaut theme
+  sddm-with-custom-bg = if sddmTheme == "astronaut" then
+    pkgs.runCommand "sddm-astronaut-custom-bg" {} ''
+      mkdir -p $out
+      cp -r ${sddm-astronaut}/* $out/
+      chmod -R +w $out
+      
+      # Create Backgrounds directory and copy custom wallpaper
+      mkdir -p $out/Backgrounds
+      cp ${customWallpaper} $out/Backgrounds/custom-bg.jpg
+      
+      # Update theme.conf to use custom background
+      if [ -f "$out/Themes/astronaut/theme.conf" ]; then
+        sed -i 's|Background=.*|Background="Backgrounds/custom-bg.jpg"|g' $out/Themes/astronaut/theme.conf
+      fi
+    ''
+  else
+    sddm-astronaut;
   sddmDependencies = [
-        sddm-astronaut
+        sddm-with-custom-bg
         pkgs.kdePackages.qtsvg # Sddm Dependency
         pkgs.kdePackages.qtmultimedia # Sddm Dependency
         pkgs.kdePackages.qtvirtualkeyboard # Sddm Dependency
