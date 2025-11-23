@@ -10,7 +10,38 @@ let
   # Path to custom wallpaper - easily changeable via variables.nix
   customWallpaper = ../themes/wallpapers/${sddmWallpaper};
   
-  sddm-astronaut = pkgs.sddm-astronaut;
+  sddm-astronaut = pkgs.sddm-astronaut.override {
+    embeddedTheme = "${sddmTheme}";
+    themeConfig =
+      if lib.hasSuffix "custom_theme" sddmTheme then
+        {
+          Background = customWallpaper;
+          ScreenPadding = "";
+          FormPosition = "left";
+          PartialBlur = "false";
+        }
+      else if lib.hasSuffix "black_hole" sddmTheme then
+        {
+          Background = customWallpaper;
+          ScreenPadding = "";
+          FormPosition = "center";
+        }
+      else if lib.hasSuffix "astronaut" sddmTheme then
+        {
+          Background = customWallpaper;
+          PartialBlur = "false";
+          FormPosition = "center";
+        }
+      else if lib.hasSuffix "purple_leaves" sddmTheme then
+        {
+          Background = customWallpaper;
+          PartialBlur = "false";
+        }
+      else
+        {
+          Background = customWallpaper;
+        };
+  };
   
   # Wrap sddm-astronaut to replace wallpaper if using astronaut theme
   sddm-with-custom-bg = if sddmTheme == "astronaut" then
