@@ -1,6 +1,6 @@
 { host, ... }:
 let
-  inherit (import ../../../../../hosts/${host}/variables.nix) hyprlockWallpaper;
+  inherit (import ../../../../../hosts/${host}/variables.nix) hyprlockWallpaper hyprlockBlur;
 in
 {
   home-manager.sharedModules = [
@@ -21,7 +21,7 @@ in
               path = "${../../../../themes/wallpapers/${hyprlockWallpaper}}";
 
               new_optimizations = true;
-              blur_size = 3;
+              blur_size = hyprlockBlur or 3;
               blur_passes = 2;
               noise = 0.0117;
               contrast = 1.000;

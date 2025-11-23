@@ -5,62 +5,33 @@
   ...
 }:
 let
-  inherit (import ../../hosts/${host}/variables.nix) sddmTheme sddmWallpaper;
-  
-  # Path to custom wallpaper - easily changeable via variables.nix
-  customWallpaper = ../themes/wallpapers/${sddmWallpaper};
-  
+  inherit (import ../../hosts/${host}/variables.nix) sddmTheme;
   sddm-astronaut = pkgs.sddm-astronaut.override {
     embeddedTheme = "${sddmTheme}";
     themeConfig =
       if lib.hasSuffix "custom_theme" sddmTheme then
         {
-          Background = "${customWallpaper}";
           ScreenPadding = "";
           FormPosition = "left";
           PartialBlur = "false";
         }
       else if lib.hasSuffix "black_hole" sddmTheme then
         {
-          Background = "${customWallpaper}";
           ScreenPadding = "";
           FormPosition = "center";
         }
       else if lib.hasSuffix "astronaut" sddmTheme then
         {
-          Background = "${customWallpaper}";
           PartialBlur = "false";
           FormPosition = "center";
         }
       else if lib.hasSuffix "purple_leaves" sddmTheme then
         {
-          Background = "${customWallpaper}";
           PartialBlur = "false";
         }
       else
-        {
-          Background = "${customWallpaper}";
-        };
+        { };
   };
-  
-  # Wrap sddm-astronaut to replace wallpaper if using astronaut theme
-  sddm-with-custom-bg = if sddmTheme == "astronaut" then
-    pkgs.runCommand "sddm-astronaut-custom-bg" {} ''
-      mkdir -p $out
-      cp -r ${sddm-astronaut}/* $out/
-      chmod -R +w $out
-      
-      # Create Backgrounds directory and copy custom wallpaper
-      mkdir -p $out/Backgrounds
-      cp ${customWallpaper} $out/Backgrounds/custom-bg.jpg
-      
-      # Update theme.conf to use custom background
-      if [ -f "$out/Themes/astronaut/theme.conf" ]; then
-        sed -i 's|Background=.*|Background="Backgrounds/custom-bg.jpg"|g' $out/Themes/astronaut/theme.conf
-      fi
-    ''
-  else
-    sddm-astronaut;
   sddmDependencies = [
         sddm-astronaut
         pkgs.kdePackages.qtsvg # Sddm Dependency

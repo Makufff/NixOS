@@ -6,10 +6,10 @@
 
   # Theme & Appearance
   waybarTheme = "minimal"; # stylish, minimal
-  sddmTheme = "sugar-dark"; # custom_theme, astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
-  sddmWallpaper = "yns4.jpg"; # SDDM login screen wallpaper (any image in modules/themes/wallpapers/)
+  sddmTheme = "purple_leaves"; # custom_theme, astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
   defaultWallpaper = "kurzgesagt.webp"; # Change with SUPER + SHIFT + W
-  hyprlockWallpaper = "yns3.jpg";
+  hyprlockWallpaper = "yns4.jpg";
+  hyprlockBlur = 1; # ปรับค่าตามต้องการ (0 = ไม่เบลอ, 3 = เบลอมาก)
 
   # Default Applications
   terminal = "kitty"; # kitty, alacritty
