@@ -84,7 +84,7 @@ in
             }
             {
               monitor = "";
-              text = "<i>Press Caps Lock to switch keyboard layout</i>";
+              text = "<i>Press Caps Lock or click to switch keyboard layout</i>";
               color = "rgba(198, 160, 246, 0.8)";
               font_size = 12;
               position = "0, 20";

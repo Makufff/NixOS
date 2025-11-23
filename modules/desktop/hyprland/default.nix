@@ -174,6 +174,7 @@ in
               input = {
                 kb_layout = "${kbdLayout}";
                 kb_variant = "${kbdVariant}";
+                kb_options = "grp:caps_toggle"; # Switch layout with Caps Lock
                 repeat_delay = 275; # or 212
                 repeat_rate = 35;
                 numlock_by_default = true;

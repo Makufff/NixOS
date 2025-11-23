@@ -31,6 +31,7 @@ in
     xkb = {
       layout = "${kbdLayout}";
       variant = "${kbdVariant}";
+      options = "grp:caps_toggle"; # Switch layout with Caps Lock
     };
   };
   nix = {

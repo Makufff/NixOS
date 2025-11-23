@@ -12,9 +12,9 @@ let
       if lib.hasSuffix "custom_theme" sddmTheme then
         {
           # Custom theme based on jake_the_dog
-          Background = ../themes/wallpapers/yns4.jpg;
+          Background = "${../themes/wallpapers/yns4.jpg}";
           ScreenPadding = "";
-          FormPosition = "center"; # left, center, right
+          FormPosition = "left"; # left, center, right
           PartialBlur = "false";
         }
       else if lib.hasSuffix "black_hole" sddmTheme then
@@ -57,7 +57,7 @@ in
           InputMethod = "";
         };
         X11 = {
-          DisplayCommand = "${pkgs.xorg.setxkbmap}/bin/setxkbmap us,th";
+          DisplayCommand = "${pkgs.xorg.setxkbmap}/bin/setxkbmap -layout us,th -option grp:caps_toggle";
           DisplayStopCommand = "";
         };
       };
