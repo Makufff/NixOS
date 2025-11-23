@@ -5,6 +5,7 @@
     protonvpn-gui # VPN
     github-desktop
     vscode
+    teams-for-linux
     # pokego # Overlayed
   ];
 }
