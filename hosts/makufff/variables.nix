@@ -6,9 +6,9 @@
 
   # Theme & Appearance
   waybarTheme = "minimal"; # stylish, minimal
-  sddmTheme = "jake_the_dog"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
+  sddmTheme = "custom_theme"; # custom_theme, astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
   defaultWallpaper = "kurzgesagt.webp"; # Change with SUPER + SHIFT + W
-  hyprlockWallpaper = "evening-sky.webp";
+  hyprlockWallpaper = "yns4.jpg";
 
   # Default Applications
   terminal = "kitty"; # kitty, alacritty

@@ -9,7 +9,15 @@ let
   sddm-astronaut = pkgs.sddm-astronaut.override {
     embeddedTheme = "${sddmTheme}";
     themeConfig =
-      if lib.hasSuffix "black_hole" sddmTheme then
+      if lib.hasSuffix "custom_theme" sddmTheme then
+        {
+          # Custom theme based on jake_the_dog
+          Background = ../themes/wallpapers/yns4.jpg;
+          ScreenPadding = "";
+          FormPosition = "center"; # left, center, right
+          PartialBlur = "false";
+        }
+      else if lib.hasSuffix "black_hole" sddmTheme then
         {
           ScreenPadding = "";
           FormPosition = "center"; # left, center, right
