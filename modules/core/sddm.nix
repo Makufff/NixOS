@@ -49,7 +49,7 @@ in
           InputMethod = "";
         };
         X11 = {
-          DisplayCommand = "${pkgs.kdePackages.setxkbmap}/bin/setxkbmap us,th";
+          DisplayCommand = "${pkgs.xorg.setxkbmap}/bin/setxkbmap us,th";
           DisplayStopCommand = "";
         };
       };
