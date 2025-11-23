@@ -15,31 +15,31 @@ let
     themeConfig =
       if lib.hasSuffix "custom_theme" sddmTheme then
         {
-          Background = customWallpaper;
+          Background = "${customWallpaper}";
           ScreenPadding = "";
           FormPosition = "left";
           PartialBlur = "false";
         }
       else if lib.hasSuffix "black_hole" sddmTheme then
         {
-          Background = customWallpaper;
+          Background = "${customWallpaper}";
           ScreenPadding = "";
           FormPosition = "center";
         }
       else if lib.hasSuffix "astronaut" sddmTheme then
         {
-          Background = customWallpaper;
+          Background = "${customWallpaper}";
           PartialBlur = "false";
           FormPosition = "center";
         }
       else if lib.hasSuffix "purple_leaves" sddmTheme then
         {
-          Background = customWallpaper;
+          Background = "${customWallpaper}";
           PartialBlur = "false";
         }
       else
         {
-          Background = customWallpaper;
+          Background = "${customWallpaper}";
         };
   };
   
