@@ -23,8 +23,8 @@
         device = "nodev";
         efiSupport = true;
         useOSProber = true;
-        gfxmodeEfi = "1920x1080"; # KawaiiGRUB works best at 1920x1080
-        gfxmodeBios = "1920x1080";
+        gfxmodeEfi = "3840x2160"; # 4k support
+        gfxmodeBios = "3840x2160";
         
         # Kawaii GRUB Theme - Cute anime-style theme
         theme = pkgs.kawaii-grub-theme;
