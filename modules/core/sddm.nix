@@ -10,14 +10,7 @@ let
   # Path to custom wallpaper - easily changeable via variables.nix
   customWallpaper = ../themes/wallpapers/${sddmWallpaper};
   
-  sddm-astronaut = pkgs.astronaut-custom.overrideAttrs (old: {
-    installPhase = old.installPhase + ''
-      # Remove blur from form in theme.conf
-      if [ -f "$out/share/sddm/themes/astronaut/theme.conf" ]; then
-        sed -i 's|PartialBlur=.*|PartialBlur="false"|g' $out/share/sddm/themes/astronaut/theme.conf
-      fi
-    '';
-  });
+  sddm-astronaut = pkgs.sddm-astronaut;
   
   # Wrap sddm-astronaut to replace wallpaper if using astronaut theme
   sddm-with-custom-bg = if sddmTheme == "astronaut" then
