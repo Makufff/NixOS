@@ -6,13 +6,34 @@
 }:
 let
   inherit (import ../../hosts/${host}/variables.nix) sddmTheme;
-  sddm-astronaut = pkgs.sddm-astronaut.override {
+  
+  # Custom SDDM theme with custom wallpaper
+  sddm-custom = pkgs.stdenv.mkDerivation {
+    pname = "sddm-astronaut-custom";
+    version = "1.0";
+    src = pkgs.sddm-astronaut;
+    
+    buildInputs = [ pkgs.rsync ];
+    
+    installPhase = ''
+      mkdir -p $out
+      cp -r $src/* $out/
+      
+      # Replace astronaut wallpaper with custom one
+      cp ${../themes/wallpapers/yns4.jpg} $out/Backgrounds/yns4.jpg
+      
+      # Update theme.conf for astronaut theme to use custom background
+      if [ -f "$out/Themes/astronaut/theme.conf" ]; then
+        sed -i 's|Background=.*|Background="Backgrounds/yns4.jpg"|g' $out/Themes/astronaut/theme.conf
+      fi
+    '';
+  };
+  
+  sddm-astronaut = (if sddmTheme == "astronaut" then sddm-custom else pkgs.sddm-astronaut).override {
     embeddedTheme = "${sddmTheme}";
     themeConfig =
       if lib.hasSuffix "custom_theme" sddmTheme then
         {
-          # Custom theme based on jake_the_dog
-          Background = "${../themes/wallpapers/yns4.jpg}";
           ScreenPadding = "";
           FormPosition = "left"; # left, center, right
           PartialBlur = "false";
