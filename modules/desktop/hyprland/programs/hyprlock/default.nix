@@ -21,7 +21,7 @@ in
               path = "${../../../../themes/wallpapers/${hyprlockWallpaper}}";
 
               new_optimizations = true;
-              blur_size = ${if hyprlockBlur != null then hyprlockBlur else 3};
+              blur_size = if hyprlockBlur != null then hyprlockBlur else 3;
               blur_passes = 2;
               noise = 0.0117;
               contrast = 1.000;
