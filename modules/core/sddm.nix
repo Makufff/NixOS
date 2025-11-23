@@ -10,32 +10,7 @@ let
   # Path to custom wallpaper - easily changeable via variables.nix
   customWallpaper = ../themes/wallpapers/${sddmWallpaper};
   
-  sddm-astronaut = pkgs.sddm-astronaut.override {
-    embeddedTheme = "${sddmTheme}";
-    themeConfig =
-      if lib.hasSuffix "custom_theme" sddmTheme then
-        {
-          ScreenPadding = "";
-          FormPosition = "left"; # left, center, right
-          PartialBlur = "false";
-        }
-      else if lib.hasSuffix "black_hole" sddmTheme then
-        {
-          ScreenPadding = "";
-          FormPosition = "center"; # left, center, right
-        }
-      else if lib.hasSuffix "astronaut" sddmTheme then
-        {
-          PartialBlur = "false";
-          FormPosition = "center"; # left, center, right
-        }
-      else if lib.hasSuffix "purple_leaves" sddmTheme then
-        {
-          PartialBlur = "false";
-        }
-      else
-        { };
-  };
+  sddm-astronaut = pkgs.astronaut-custom;
   
   # Wrap sddm-astronaut to replace wallpaper if using astronaut theme
   sddm-with-custom-bg = if sddmTheme == "astronaut" then
@@ -56,7 +31,7 @@ let
   else
     sddm-astronaut;
   sddmDependencies = [
-        sddm-with-custom-bg
+        sddm-astronaut
         pkgs.kdePackages.qtsvg # Sddm Dependency
         pkgs.kdePackages.qtmultimedia # Sddm Dependency
         pkgs.kdePackages.qtvirtualkeyboard # Sddm Dependency
