@@ -10,6 +10,8 @@ in
         settings = {
           general = {
             hide_cursor = true;
+            # Enable keyboard layout switching
+            enable_fingerprint = false;
           };
 
           background = [
@@ -76,6 +78,15 @@ in
               text = "Current Layout : $LAYOUT";
               color = "rgb(198, 160, 246)";
               font_size = 14;
+              position = "0, 40";
+              halign = "center";
+              valign = "bottom";
+            }
+            {
+              monitor = "";
+              text = "<i>Press Caps Lock to switch keyboard layout</i>";
+              color = "rgba(198, 160, 246, 0.8)";
+              font_size = 12;
               position = "0, 20";
               halign = "center";
               valign = "bottom";

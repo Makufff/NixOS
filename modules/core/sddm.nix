@@ -42,7 +42,17 @@ in
       autoNumlock = true;
       package = lib.mkForce pkgs.kdePackages.sddm;
       extraPackages = sddmDependencies;
-      settings.Theme.CursorTheme = "Bibata-Modern-Classic";
+      settings = {
+        Theme.CursorTheme = "Bibata-Modern-Classic";
+        # Enable keyboard layout switching
+        General = {
+          InputMethod = "";
+        };
+        X11 = {
+          DisplayCommand = "${pkgs.kdePackages.setxkbmap}/bin/setxkbmap us,th";
+          DisplayStopCommand = "";
+        };
+      };
       theme = "sddm-astronaut-theme";
     };
   };
