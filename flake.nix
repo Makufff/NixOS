@@ -51,6 +51,10 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nvchad4nix = {
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -77,6 +81,12 @@
           system = forAllSystems (system: system);
           modules = [
             ./hosts/${host}/configuration.nix
+            # Add antigravity to systemPackages for all hosts
+            ({ pkgs, ... }: {
+              environment.systemPackages = [
+                inputs.antigravity-nix.packages.${pkgs.system}.default
+              ];
+            })
           ];
           specialArgs = {
             overlays = import ./overlays { inherit inputs host; };
