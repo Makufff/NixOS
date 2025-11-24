@@ -16,8 +16,8 @@ in
       # Scan WiFi more frequently for better connection
       wifi.scanRandMacAddress = true;
     };
-    # Fallback DNS servers
-    nameservers = ["1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4" "10.253.192.1"];
+    # Fallback DNS servers (ensure 1.1.1.1 and 8.8.8.8 always present)
+    nameservers = ["1.1.1.1" "8.8.8.8" "1.0.0.1" "8.8.4.4" "10.253.192.1"];
     # Enable DHCP on all interfaces by default
     useDHCP = lib.mkDefault true;
     # Extra hosts for internal domains
