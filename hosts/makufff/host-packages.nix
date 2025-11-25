@@ -13,6 +13,7 @@
   xorg.libX11
   wireshark
   wireshark-qt
+  nvtop
     # pokego # Overlayed
   ];
 }
