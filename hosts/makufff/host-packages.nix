@@ -17,5 +17,6 @@
       code-cursor
       # pokego # Overlayed
       postman
-    ] ++ (if builtins.hasAttr "prismlauncher" pkgs then [ pkgs.prismlauncher ] else []));
+    ] ++ (if builtins.hasAttr "prismlauncher" pkgs then [ pkgs.prismlauncher ] else [])
+      ++ (if builtins.hasAttr "ciscoPacketTracer8" pkgs then [ pkgs.ciscoPacketTracer8 ] else []));
 }
