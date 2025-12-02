@@ -54,7 +54,7 @@ in
     ../../modules/programs/misc/tlp
     ../../modules/programs/misc/thunar
     ../../modules/programs/misc/lact # GPU fan, clock and power configuration
-    ../../modules/programs/misc/packet-tracer # Cisco Packet Tracer with Firejail
+    ../../modules/programs/misc/packet-tracer.nix # Cisco Packet Tracer with Firejail
   ]
   ++ lib.optional (vars.games == true) ../../modules/core/games.nix;
 }
