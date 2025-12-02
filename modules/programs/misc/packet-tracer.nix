@@ -1,5 +1,5 @@
 { pkgs, lib, ... }:
-lib.mkIf (builtins.hasAttr "ciscoPacketTracer8" pkgs) {
+{
   # Packet tracer log in can be subverted if there is no internet connection
   # so use firejail to isolate packet tracer into its own network namespace
   # when running
