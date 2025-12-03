@@ -10,7 +10,7 @@
       # Normal Fonts
       noto-fonts
       noto-fonts-color-emoji
-      bai-jamjuree
+      (google-fonts.override { fonts = [ "BaiJamjuree" ]; })
     ];
     fontconfig = {
       enable = true;
