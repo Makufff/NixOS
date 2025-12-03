@@ -10,7 +10,7 @@
         executable = lib.getExe pkgs.ciscoPacketTracer8;
 
         # Will still want a .desktop entry as the package is not directly added
-        desktop = "${pkgs.ciscoPacketTracer8}/share/applications/cisco-pt8.desktop";
+        desktop = "${pkgs.ciscoPacketTracer8}/share/applications/cisco-pt8.desktop.desktop";
 
         extraArgs = [
           # This should make it run in isolated netns, preventing internet access

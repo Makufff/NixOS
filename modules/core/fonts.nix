@@ -10,6 +10,7 @@
       # Normal Fonts
       noto-fonts
       noto-fonts-color-emoji
+      bai-jamjuree
     ];
     fontconfig = {
       enable = true;
@@ -22,10 +23,12 @@
           "DejaVu Sans Mono" # Default
         ];
         sansSerif = [
+          "Bai Jamjuree"
           "Noto Sans"
           "DejaVu Sans" # Default
         ];
         serif = [
+          "Bai Jamjuree"
           "Noto Serif"
           "DejaVu Serif" # Default
         ];
