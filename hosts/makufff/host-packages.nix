@@ -18,5 +18,6 @@
       # pokego # Overlayed
       postman
       ciscoPacketTracer8  # Cisco Packet Tracer 8
+      tor-browser
     ] ++ (if builtins.hasAttr "prismlauncher" pkgs then [ pkgs.prismlauncher ] else []));
 }
