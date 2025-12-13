@@ -15,6 +15,19 @@
       });
     '';
     
+    # Allow sudo to preserve display environment for GUI apps
+    sudo.extraRules = [
+      {
+        users = [ "makufff" ];
+        commands = [
+          {
+            command = "${pkgs.gparted}/bin/gparted";
+            options = [ "SETENV" "NOPASSWD" ];
+          }
+        ];
+      }
+    ];
+    
     apparmor = {
       enable = true;
       killUnconfinedConfinables = true;
