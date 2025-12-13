@@ -4,6 +4,17 @@
   security = {
     rtkit.enable = true;
     polkit.enable = true;
+    
+    # Allow GParted to run with GUI via pkexec
+    polkit.extraConfig = ''
+      polkit.addRule(function(action, subject) {
+        if (action.id == "org.debian.pkexec.gparted" &&
+            subject.isInGroup("wheel")) {
+          return polkit.Result.YES;
+        }
+      });
+    '';
+    
     apparmor = {
       enable = true;
       killUnconfinedConfinables = true;
