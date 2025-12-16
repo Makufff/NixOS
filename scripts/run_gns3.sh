@@ -1,11 +1,9 @@
 #!/usr/bin/env bash
 
-# Ensure VBoxManage is in PATH
-export PATH=/home/makufff/NixOS/scripts/fake_vmware:$PATH:/run/current-system/sw/bin
+# NixOS launcher for GNS3 focused on VMware integration
 
-# Explicitly set VBoxManage path env var if GNS3 respects it (it might not, but doesn't hurt)
-export VBOX_INSTALL_PATH=/run/current-system/sw/bin
+# Ensure NixOS system binaries (including vmware / vmrun / gns3server) are in PATH
+export PATH=/run/current-system/sw/bin:$PATH
 
-# Run GNS3
-echo "Starting GNS3 with corrected PATH..."
+echo "Starting GNS3 for VMware (using system vmware/vmrun)..."
 /run/current-system/sw/bin/gns3 "$@"
