@@ -62,7 +62,7 @@ in
   # Docker packages
   docker       # Docker daemon + CLI
   docker-compose # Docker Compose (v1/v2 wrapper if available)
-  vmware-workstation # VMware Workstation (host application)
+
     # Virtualisation / VM tools
     qemu_kvm # QEMU KVM hypervisor
     libvirt # libvirt management tools (includes virt-install)

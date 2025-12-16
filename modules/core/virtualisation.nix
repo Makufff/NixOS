@@ -58,6 +58,8 @@
       enable = true;
       enableExtensionPack = true;
     };
+
+    vmware.host.enable = true;
   };
 
   services = {
