@@ -22,5 +22,8 @@
       gparted
       gns3-gui
       gns3-server
+      dynamips
+      ubridge
+      vpcs
     ] ++ (if builtins.hasAttr "prismlauncher" pkgs then [ pkgs.prismlauncher ] else []));
 }

@@ -27,5 +27,24 @@ in
       withOpenASAR = true;
       enableAutoscroll = true;
     };
+    gns3-gui = prev.gns3-gui.overrideAttrs (oldAttrs: rec {
+      version = "2.2.55";
+      src = prev.fetchFromGitHub {
+        owner = "GNS3";
+        repo = "gns3-gui";
+        rev = "v${version}";
+        sha256 = "1576fpjshvr989m0lwsmmpmn1rq1pi7abfgwbn8899hdm50yadpa";
+      };
+    });
+    gns3-server = prev.gns3-server.overrideAttrs (oldAttrs: rec {
+      version = "2.2.55";
+      src = prev.fetchFromGitHub {
+        owner = "GNS3";
+        repo = "gns3-server";
+        rev = "v${version}";
+        sha256 = "13pyjn3nf8nhc5wgc2dwja4bihl1f6g2qhs0c4b9nsrcfsn12km3";
+      };
+      doCheck = false;
+    });
   };
 }

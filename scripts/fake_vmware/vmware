@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "Fake VMware wrapper"
+exit 0
