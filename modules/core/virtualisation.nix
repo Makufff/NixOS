@@ -70,6 +70,23 @@
     virt-manager.enable = true;
   };
 
+  security.wrappers = {
+    ubridge = {
+      source = "${pkgs.ubridge}/bin/ubridge";
+      capabilities = "cap_net_admin,cap_net_raw=ep";
+      owner = "root";
+      group = "root";
+      permissions = "u+rx,g+x,o+x";
+    };
+    dynamips = {
+      source = "${pkgs.dynamips}/bin/dynamips";
+      capabilities = "cap_net_admin,cap_net_raw=ep";
+      owner = "root";
+      group = "root";
+      permissions = "u+rx,g+x,o+x";
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     virt-viewer # View Virtual Machines
     spice
