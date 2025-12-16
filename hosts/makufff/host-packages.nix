@@ -20,5 +20,7 @@
       ciscoPacketTracer8  # Cisco Packet Tracer 8
       tor-browser
       gparted
+      gns3-gui
+      gns3-server
     ] ++ (if builtins.hasAttr "prismlauncher" pkgs then [ pkgs.prismlauncher ] else []));
 }
