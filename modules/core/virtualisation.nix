@@ -100,5 +100,14 @@
 
     lazydocker
     docker-client
+    gsettings-desktop-schemas
   ];
+
+  environment.etc."vmware/hostd/proxy.xml".text = ''
+    <ConfigRoot>
+      <httpProxy>
+        <enabled>false</enabled>
+      </httpProxy>
+    </ConfigRoot>
+  '';
 }

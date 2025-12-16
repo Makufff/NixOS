@@ -1,5 +1,6 @@
 { self, pkgs, ... }:
 {
+  programs.zsh.enable = true;
   home-manager.sharedModules = [
     (
       { config, ... }:
