@@ -25,5 +25,6 @@
       dynamips
       ubridge
       vpcs
+      libvirt
     ] ++ (if builtins.hasAttr "prismlauncher" pkgs then [ pkgs.prismlauncher ] else []));
 }
