@@ -63,11 +63,22 @@ in
   docker       # Docker daemon + CLI
   docker-compose # Docker Compose (v1/v2 wrapper if available)
 
-    # Virtualisation / VM tools
-    qemu_kvm # QEMU KVM hypervisor
-    libvirt # libvirt management tools (includes virt-install)
-    virt-manager # GUI manager for virtual machines
-    libguestfs # Tools for manipulating guest filesystem images
+  # Virtualisation / VM tools
+  qemu_kvm # QEMU KVM hypervisor
+  libvirt # libvirt management tools (includes virt-install)
+  virt-manager # GUI manager for virtual machines
+  libguestfs # Tools for manipulating guest filesystem images
+
+  # --- GNS3 Full Stack ---
+  gns3-gui # GNS3 GUI
+  gns3-server # GNS3 Server
+  dynamips # Cisco router emulator for GNS3
+  ubridge # Network bridge for GNS3
+  vpcs # Virtual PC Simulator for GNS3
+
+  # --- VMware ---
+  vmware-workstation # VMware Workstation Pro/Player (unfree)
+  open-vm-tools # VMware guest tools (for running VMs)
     # aider-chat # AI in terminal (Optional: Client only)
     # cmatrix # Matrix Movie Effect In Terminal
     # cowsay # Great Fun Terminal Program

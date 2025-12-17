@@ -59,7 +59,12 @@
       enableExtensionPack = true;
     };
 
-    vmware.host.enable = true;
+  vmware.host.enable = true; # VMware Workstation/Player host modules
+
+  # NOTE: After installing VMware, you may need to run:
+  #   sudo vmware-modconfig --console --install-all
+  # and accept the EULA/license in the GUI on first launch.
+  # For more info: https://nixos.wiki/wiki/VMware
   };
 
   services = {
