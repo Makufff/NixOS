@@ -1,3 +1,4 @@
+
 { pkgs, lib, ... }:
 {
   # Only enable either docker or podman -- Not both
@@ -12,46 +13,8 @@
 
     libvirtd = {
       enable = true;
-      qemu = {
-        package = pkgs.qemu_kvm;
-        swtpm.enable = true;
-        # ovmf submodule has been removed - OVMF images are now available by default
-      };
-      hooks.qemu = {
-        "passthrough" = lib.getExe (
-          pkgs.writeShellApplication {
-            name = "qemu-hook";
-
-            runtimeInputs = with pkgs; [
-              libvirt
-              systemd
-              kmod
-            ];
-
-            text = ''
-              GUEST_NAME="$1"
-              OPERATION="$2"
-
-              if [ "$GUEST_NAME" != "win11-passthrough" ]; then
-                exit 0;
-              fi
-
-              if [ "$OPERATION" == "prepare" ]; then
-                systemctl stop display-manager.service
-                modprobe -r -a nvidia_drm nvidia_uvm nvidia_modeset nvidia
-                virsh nodedev-detach pci_0000_01_00_0
-                modprobe vfio-pci
-              fi
-
-              if [ "$OPERATION" == "release" ]; then
-                virsh nodedev-reattach pci_0000_01_00_0
-                modprobe -a nvidia nvidia_modeset nvidia_uvm nvidia_drm
-                systemctl start display-manager.service
-              fi
-            '';
-          }
-        );
-      };
+      qemu.package = pkgs.qemu_kvm;
+      # แนะนำ: ถ้าใช้ GNS3 VM ให้ตั้ง network ของ VM เป็น Bridged หรือ Host-only
     };
 
     virtualbox.host = {
@@ -59,13 +22,15 @@
       enableExtensionPack = true;
     };
 
-  vmware.host.enable = true; # VMware Workstation/Player host modules
+    vmware.host.enable = true; # VMware Workstation/Player host modules
 
-  # NOTE: After installing VMware, you may need to run:
-  #   sudo vmware-modconfig --console --install-all
-  # and accept the EULA/license in the GUI on first launch.
-  # For more info: https://nixos.wiki/wiki/VMware
+    # NOTE: After installing VMware, you may need to run:
+    #   sudo vmware-modconfig --console --install-all
+    # and accept the EULA/license in the GUI on first launch.
+    # For more info: https://nixos.wiki/wiki/VMware
   };
+  # Ensure the default NAT network (virbr0) is always available for GNS3 VM and VMs
+  environment.etc."libvirt/qemu/networks/default.xml".source = "${pkgs.libvirt}/etc/libvirt/qemu/networks/default.xml";
   # Provide the default NAT network definition for libvirt
   environment.etc."libvirt/qemu/networks/default.xml".source = "${pkgs.libvirt}/etc/libvirt/qemu/networks/default.xml";
 
