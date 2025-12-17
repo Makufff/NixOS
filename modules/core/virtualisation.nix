@@ -65,14 +65,6 @@
   #   sudo vmware-modconfig --console --install-all
   # and accept the EULA/license in the GUI on first launch.
   # For more info: https://nixos.wiki/wiki/VMware
-    # Ensure the default NAT network (virbr0) is always available for GNS3 and VMs
-    onBoot = ''
-      if ! virsh net-list --all | grep -q default; then
-        virsh net-define /etc/libvirt/qemu/networks/default.xml
-        virsh net-autostart default
-        virsh net-start default
-      fi
-    '';
   };
   # Provide the default NAT network definition for libvirt
   environment.etc."libvirt/qemu/networks/default.xml".source = "${pkgs.libvirt}/etc/libvirt/qemu/networks/default.xml";
