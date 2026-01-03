@@ -59,6 +59,10 @@
       url = "github:nix-community/nix4nvchad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -82,11 +86,14 @@
           modules = [
             ./hosts/${host}/configuration.nix
             # Add antigravity to systemPackages for all hosts
-            ({ pkgs, ... }: {
-              environment.systemPackages = [
-                inputs.antigravity-nix.packages.${pkgs.system}.default
-              ];
-            })
+            (
+              { pkgs, ... }:
+              {
+                environment.systemPackages = [
+                  inputs.antigravity-nix.packages.${pkgs.system}.default
+                ];
+              }
+            )
           ];
           specialArgs = {
             overlays = import ./overlays { inherit inputs host; };

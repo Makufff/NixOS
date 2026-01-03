@@ -1,4 +1,3 @@
-
 { pkgs, lib, ... }:
 {
   # Only enable either docker or podman -- Not both
@@ -30,9 +29,8 @@
     # For more info: https://nixos.wiki/wiki/VMware
   };
   # Ensure the default NAT network (virbr0) is always available for GNS3 VM and VMs
-  environment.etc."libvirt/qemu/networks/default.xml".source = "${pkgs.libvirt}/etc/libvirt/qemu/networks/default.xml";
-  # Provide the default NAT network definition for libvirt
-  environment.etc."libvirt/qemu/networks/default.xml".source = "${pkgs.libvirt}/etc/libvirt/qemu/networks/default.xml";
+  environment.etc."libvirt/qemu/networks/default.xml".source =
+    "${pkgs.libvirt}/etc/libvirt/qemu/networks/default.xml";
 
   services = {
     qemuGuest.enable = true;

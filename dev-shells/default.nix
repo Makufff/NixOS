@@ -163,6 +163,10 @@ rec {
     path = ./zig;
     description = "Zig development environment";
   };
+  tauri = {
+    path = ./tauri;
+    description = "Tauri development environment";
+  };
 
   # Aliases
   c = c-cpp;
